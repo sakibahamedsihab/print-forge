@@ -1,4 +1,7 @@
 import { getAllCategories, getCategoryBySlug } from "@/app/lib/categories";
+import { getAllModelsByCategory } from "@/app/lib/models";
+import ModelCard from "@/components/ModelCard";
+import ModelsGrid from "@/components/ModelsGrid";
 
 export default async function CategoryPage({
   params,
@@ -6,6 +9,6 @@ export default async function CategoryPage({
   params: Promise<{ categoryName: string }>;
 }) {
   const { categoryName } = await params;
-  const category = getCategoryBySlug(categoryName);
-  return <h1>{category.displayName}</h1>;
+  const models = await getAllModelsByCategory(categoryName);
+  return <ModelsGrid title="3D models" models={models} />;
 }
